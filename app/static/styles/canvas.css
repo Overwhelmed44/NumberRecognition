@@ -1,0 +1,71 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+#container {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#i-container {
+    display: flex;
+}
+
+#ii-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 1vw;
+}
+
+#canvas {
+    border: solid black 1px;
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: column;
+}
+
+#predictions {
+    display: flex;
+    flex-direction: column;
+    
+    text-overflow: clip;
+}
+
+.layer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.layer > * {
+    width: 25px;
+    aspect-ratio: 1;
+}
+
+div.p.f {
+    background-color: black;
+}
+
+button {
+    margin-top: 1vh;
+    border: 0;
+    outline: 0;
+    background-color: transparent;
+
+    font-size: 2vw;
+    cursor: pointer;
+}
+
+p {
+    width: 0;
+    white-space: nowrap;
+}
