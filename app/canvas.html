@@ -6,17 +6,27 @@
         <script src="/static/functions/canvas.js"></script>
     </head>
     <body>
-        <div id="container">
-            <div id="i-container">
-                <div id="ii-container">
-                    <div id="canvas">
-
+        <div id="main">
+            <div id="container">
+                <div id="i-container">
+                    <div id="ii-container">
+                        <div id="canvas">
+    
+                        </div>
+                        <button id="clear">Clear</button>
                     </div>
-                    <button id="clear">Clear</button>
+                    <div id="predictions">
+                        <p>Prediction: -</p>
+                    </div>
                 </div>
-                <div id="predictions">
-                    
+            </div>
+        </div>
+        <div id="modal">
+            <div id="modal-wrapper">
+                <div id="inner-modal-wrapper">
+                    <input id="width" placeholder="width" required><span>X</span><input id="height" placeholder="height" required>
                 </div>
+                <button id="set">Set</button>
             </div>
         </div>
     </body>

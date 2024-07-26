@@ -1,18 +1,23 @@
-window.onload = () => {
-    const shape = [28, 28];
-    const canvas = document.getElementById('canvas');
-    const clear = document.getElementById('clear');
-    var predictions = document.getElementById('predictions');
-    var layers = [];
-    var layer;
-    var child;
-    var mouseDown = false;
+var canvas;
+var clear ;
+var set;
+var main;
+var modal ;
+var width ;
+var height;
+var predic;
+var layers = [];
+var layer;
+var mouseDown = false;
+var socket;
 
-    for (let n = 0; n < shape[0]; n++) {
+
+function mainF() {
+    for (let n = 0; n < height; n++) {
         children = [];
         layer = document.createElement('div');
         layer.classList.add('layer')
-        for (let m = 0; m < shape[1]; m++) {
+        for (let m = 0; m < width; m++) {
             const child = document.createElement('div');
             child.classList.add(['p']);
 
@@ -21,18 +26,6 @@ window.onload = () => {
         layers.push(layer);
         canvas.appendChild(layer);
     }
-
-    for (let n = 0; n < 10; n++) {
-        child = document.createElement('p');
-        child.innerHTML = `${n} = 0.0`;
-        predictions.appendChild(child);
-    }
-    child = document.createElement('p');
-    child.innerHTML = 'Prediction: -';
-    child.style.fontWeight = '600';
-    predictions.appendChild(child);
-
-    const socket = new WebSocket('ws://' + window.location.host + '/ws');
 
     document.addEventListener('mousedown', () => mouseDown = true);
     document.addEventListener('mouseup', () => mouseDown = false);
@@ -50,14 +43,8 @@ window.onload = () => {
     })
 
     socket.onmessage = async (message) => {
-        const prediction = JSON.parse(message.data);
-        for (let n = 0; n < 10; n++) {
-            predictions.children[n].innerHTML = `${n} = ${prediction[n]}`;
-            predictions.children[n].style.fontWeight = '500';
-        }
-        const p = prediction['l'];
-        predictions.children[10].innerHTML = `Prediction: ${p}`;
-        predictions.children[p].style.fontWeight = '600';
+        const prediction = message.data;
+        predictions.children[0].innerHTML = `Prediction: ${prediction}`;
     }
 
     canvas.addEventListener('dragstart', (ev) => ev.preventDefault());
@@ -69,13 +56,32 @@ window.onload = () => {
                 pixel.classList.remove('f');
             }
         }
-        var c;
-        for (let n = 0; n < 10; n++) {
-            c = predictions.children[n];
-            c.innerHTML = `${n} = 0.0`;
-            c.style.fontWeight = '500';
-        }
-        predictions.children[10].innerHTML = 'Prediction: -';
+        predictions.children[0].innerHTML = 'Prediction: -';
         socket.send(new Uint8Array(0));
     })
+}
+
+
+window.onload = () => {
+    canvas = document.getElementById('canvas');
+    clear = document.getElementById('clear');
+    set = document.getElementById('set');
+    main = document.getElementById('main');
+    modal = document.getElementById('modal');
+    width = document.getElementById('width');
+    height = document.getElementById('height');
+    predictions = document.getElementById('predictions');
+    socket = new WebSocket('ws://' + window.location.host + '/ws');
+    
+    set.addEventListener('click', () => {
+        socket.send(new Uint8Array([height.value, width.value]))
+
+        height = height.value;
+        width = width.value;
+
+        modal.style.display = 'none';
+        main.style.display = 'block';
+
+        mainF()
+    });
 }
