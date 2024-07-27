@@ -1,4 +1,4 @@
-# Numbers Recognition
+# Number Recognition
 Web application that recognize hand-drawn numbers
 
 - Python 3.12 used
