@@ -1,13 +1,13 @@
 from keras.api.utils import to_categorical
 from keras.api.datasets import mnist
-from numpy import where
+from app.utils import threshold
 
 
 def train(network, save=True):
     (itr, ltr), (ite, lte) = mnist.load_data()
 
-    itr = where(itr > 127, 1, 0)
-    ite = where(ite > 127, 1, 0)
+    itr = threshold(itr)
+    ite = threshold(ite)
 
     ltr = to_categorical(ltr, 10)
     lte = to_categorical(lte, 10)

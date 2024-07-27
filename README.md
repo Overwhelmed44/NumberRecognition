@@ -1,5 +1,5 @@
-# Digit Recognition
-Web application that recognize hand-drawn digits
+# Numbers Recognition
+Web application that recognize hand-drawn numbers
 
 - Python 3.12 used
 - CNN model built with keras

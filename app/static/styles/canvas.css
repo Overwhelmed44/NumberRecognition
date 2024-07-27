@@ -40,6 +40,7 @@ html, body, #main {
 span {
     margin-left: 1vw;
     margin-right: 1vw;
+    font-size: clamp(12px, 1.5vw, 20px);
 }
 
 input {
@@ -47,6 +48,7 @@ input {
     border: 0;
     outline: 0;
     text-align: center;
+    font-size: clamp(12px, 1.5vw, 20px);
 }
 
 #container {
@@ -92,7 +94,7 @@ input {
 }
 
 .layer > * {
-    width: .5vw;
+    width: clamp(10px, 1vw, 18px);
     aspect-ratio: 1;
 }
 
@@ -106,7 +108,7 @@ button {
     outline: 0;
     background-color: transparent;
 
-    font-size: 2vw;
+    font-size: clamp(19px, 2vw, 25px);
     cursor: pointer;
 }
 
@@ -114,5 +116,5 @@ p {
     width: 0;
     white-space: nowrap;
     font-weight: 600;
-    font-size: 2vw;
+    font-size: clamp(19px, 2vw, 25px);
 }

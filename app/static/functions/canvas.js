@@ -8,6 +8,7 @@ var height;
 var predic;
 var layers = [];
 var layer;
+var predictions;
 var mouseDown = false;
 var socket;
 
