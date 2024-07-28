@@ -8,7 +8,7 @@ Web application that recognize hand-drawn numbers
 # Try it out
 Clone the repository
 ```
-git clone https://github.com/Overwhelmed44/DigitRecognition.git
+git clone https://github.com/Overwhelmed44/NumberRecognition.git
 ```
 Install all required packages
 ```
