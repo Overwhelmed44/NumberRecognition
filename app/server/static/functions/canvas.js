@@ -75,10 +75,10 @@ window.onload = () => {
     socket = new WebSocket('ws://' + window.location.host + '/ws');
     
     set.addEventListener('click', () => {
-        socket.send(new Uint8Array([height.value, width.value]))
+        height = Math.min(60, parseInt(height.value));
+        width = Math.min(120, parseInt(width.value));
 
-        height = height.value;
-        width = width.value;
+        socket.send(new Uint8Array([height, width]))
 
         modal.style.display = 'none';
         main.style.display = 'block';

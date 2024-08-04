@@ -1,19 +1,14 @@
-from fastapi import FastAPI, WebSocket, WebSocketDisconnect
+from fastapi import WebSocket, WebSocketDisconnect
 from app.utils import center, find_box_contours
-from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
+from . import app, model
 import numpy as np
-
-app = FastAPI()
-app.mount('/static', StaticFiles(directory='app/static'))
-
-from app import network
 
 
 @app.get('/')
 @app.get('/index')
 async def index():
-    return FileResponse('app/canvas.html')
+    return FileResponse('app/server/canvas.html')
 
 
 @app.websocket('/ws')
@@ -38,9 +33,9 @@ async def ws(soc: WebSocket):
                 s = canvas[y:y+h,x:x+w]
                 s = center(s)
 
-                r.append((x, y+h, str(network(np.expand_dims(s, 0), training=False).numpy().argmax())))
+                r.append((x, str(model(np.expand_dims(s, 0), training=False).numpy().argmax())))
 
-            response = ''.join(p[2] for p in sorted(r, key=lambda t: t[0]))
+            response = ''.join(p[1] for p in sorted(r, key=lambda t: t[0]))
 
             await soc.send_text(response)
     except WebSocketDisconnect:

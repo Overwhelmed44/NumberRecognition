@@ -4,7 +4,7 @@ from keras.api.activations import relu, softmax
 from keras.api.optimizers import Adam
 from keras import Sequential
 
-network = Sequential([
+model = Sequential([
     Input((28, 28, 1)),
 
     Conv2D(32, (3, 3), padding='same', activation=relu),
@@ -17,4 +17,4 @@ network = Sequential([
     Dense(10, softmax)
 ])
 
-network.compile(Adam(), CategoricalCrossentropy(), metrics=['accuracy'])
+model.compile(Adam(), CategoricalCrossentropy(), metrics=['accuracy'])
